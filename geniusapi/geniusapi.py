@@ -1,13 +1,14 @@
 import requests
+import os
 from bs4 import BeautifulSoup
-from geniusapi.gat import access_token
+from config import config
 
 class GeniusApi:
-    
+
     site_url = 'https://genius.com'
     api_url = 'https://api.genius.com'
     headers = {
-        'Authorization': 'Bearer ' + access_token,
+        'Authorization': 'Bearer ' + os.environ.get('genius_access_token'),
         'Content-Type': 'application/json; charset=utf-8'
         }
     

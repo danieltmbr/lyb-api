@@ -23,4 +23,4 @@ api.add_resource(Songs, '/songs/<int:id>')
 api.add_resource(Lyrics, '/lyrics/<string:path>')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
