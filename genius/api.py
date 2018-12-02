@@ -24,10 +24,16 @@ class GeniusApi:
         return requests.get(song_url, headers=self.headers).json()
 
     def get_lyrics(self, path):
-        page_url = self.site_url + '/' + path
+        page_url = self.site_url + self.__prepare_path(path)
         page = requests.get(page_url)
-        return {'lyrics': self.extract_lyrics(page)}
+        return self.extract_lyrics(page)
 
     def extract_lyrics(self, page):
         html = BeautifulSoup(page.text, 'html.parser')
         return html.find('div', class_='lyrics').get_text()
+
+    def __prepare_path(self, path):
+        if path[0] == '/':
+            return path
+        else:
+            return '/' + path

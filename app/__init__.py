@@ -20,10 +20,36 @@ def create_app(config_name):
 
     @app.route('/v1/song/<int:id>', methods=['GET'])
     def getSong(id):
-        return genius_api.get_song(id)
+        resp = genius_api.get_song(id)
+        song = resp['response']['song']
+        return __clean_song(song)
 
     @app.route('/v1/lyrics/<string:path>', methods=['GET'])
     def getLyrics(path):
         return genius_api.get_lyrics(path)
+
+    @app.route('/v1/lyrics', methods=['GET'])
+    def searchLyrics():
+        q = request.args.get('q')
+        resp = genius_api.search(q)
+        song = resp['response']['hits'][0]['result']
+        lyrics = genius_api.get_lyrics(song['path'])
+        song['lyrics'] = lyrics
+        return __clean_song(song)
+
+    def __clean_song(song):
+        keys = [
+            'description',
+            'embed_content',
+            'fact_track', 
+            'stats', 
+            'current_user_metadata',
+            'custom_performances', 
+            'description_annotation',
+            'song_relationships'
+        ]
+        for key in keys:
+            song.pop(key, None)
+        return song
 
     return app
