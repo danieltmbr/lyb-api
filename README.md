@@ -12,17 +12,21 @@ The service is backed by [Genius Api](https://docs.genius.com) and lyrics scrapi
 
 ### Endpoints
 
-**Base url:** https://lyb.herokuapp.com/v1
+**Base url:** https://lyb.herokuapp.com/v1/
 
-- **/search?q={_string:search_query_}:**
+- **search?q={_string:search_query_}:**
  
   **GET** request returning a json song list with the top results.
 
-- **/song/{_int:id_}:**
+- **song/{_int:id_}:**
   
   **GET** request returning a json song object by id (only metainfo **NO** lyrics attached).
+
+- **album/{_int:id_}:**
+  
+  **GET** request returning a json album object by id.
     
-- **/lyrics/{_string:genius_lyrics_path_}:**
+- **lyrics/{_string:genius_lyrics_path_}:**
   
   **GET** request returning a text with the lyrics scraped from genius html page. For path use `path` property of song object from previous endpoints' result.
 
@@ -32,9 +36,8 @@ The service is backed by [Genius Api](https://docs.genius.com) and lyrics scrapi
 
 ### Further improvements  
 
-**Technical stuff**
+**Technical stuff:**
 
 - Error handling
-- Clean json response (remove unnecessary stuff)
 - Write tests
 - Clean app architecture
