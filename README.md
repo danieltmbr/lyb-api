@@ -22,6 +22,10 @@ The service is backed by [Genius Api](https://docs.genius.com) and lyrics scrapi
   
   **GET** request returning a json song object by id (only metainfo **NO** lyrics attached).
 
+- **artist/{_int:id_}:**
+  
+  **GET** request returning a json artist object by id.
+
 - **album/{_int:id_}:**
   
   **GET** request returning a json album object by id.
