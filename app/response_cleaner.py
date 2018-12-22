@@ -34,7 +34,7 @@ class GeniusResponseCleaner:
     __clean_song_keys = [
         'annotation_count',
         'api_path',
-        'header_image_thumbnail_url',
+        # 'header_image_thumbnail_url',
         'header_image_url',
         'lyrics_owner_id',
         'pyongs_count',
