@@ -10,7 +10,7 @@ class GeniusResponseCleaner:
         'pyongs_count',
         'release_date_components',
         'current_user_metadata',
-        'cover_arts',
+        # 'cover_arts',
         'description_annotation',
         'performance_groups',
         'song_performances',
@@ -34,7 +34,7 @@ class GeniusResponseCleaner:
     __clean_song_keys = [
         'annotation_count',
         'api_path',
-        # 'header_image_thumbnail_url',
+        'header_image_thumbnail_url',
         'header_image_url',
         'lyrics_owner_id',
         'pyongs_count',
@@ -81,10 +81,23 @@ class GeniusResponseCleaner:
         return self.__clean(artist, self.__clean_artist_keys)
 
     def clean_album(self, album):
-        album = self.__clean(album, self.__clean_album_keys)
-
         if 'artist' in album: 
             album['artist'] =  self.clean_artist(album['artist'])
+
+        if 'song_performances' in album:
+            for item in album['song_performances']:
+                if item['label'] == 'Featuring':
+                    album['featurings'] = list(map(lambda a: self.clean_artist(a), item['artists'])
+                elif item['label'] == 'Producers':
+                    album['producers'] = list(map(lambda a: self.clean_artist(a), item['artists'])
+                elif item['label'] == 'Writers':
+                    album['writers'] = list(map(lambda a: self.clean_artist(a), item['artists'])
+                elif item['label'] == 'Executive Producer':
+                    album['executive_producers'] = list(map(lambda a: self.clean_artist(a), item['artists'])
+                elif item['label'] == 'Label':
+                    album['labels'] = list(map(lambda a: self.clean_artist(a), item['artists'])
+
+        album = self.__clean(album, self.__clean_album_keys)
 
         return album
 
