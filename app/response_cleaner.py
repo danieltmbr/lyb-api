@@ -87,15 +87,17 @@ class GeniusResponseCleaner:
         if 'song_performances' in album:
             for item in album['song_performances']:
                 if item['label'] == 'Featuring':
-                    album['featurings'] = list(map(lambda a: self.clean_artist(a), item['artists'])
+                    album['featurings'] = list(map(lambda a: self.clean_artist(a), item['artists']))
                 elif item['label'] == 'Producers':
-                    album['producers'] = list(map(lambda a: self.clean_artist(a), item['artists'])
+                    album['producers'] = list(map(lambda a: self.clean_artist(a), item['artists']))
                 elif item['label'] == 'Writers':
-                    album['writers'] = list(map(lambda a: self.clean_artist(a), item['artists'])
+                    album['writers'] = list(map(lambda a: self.clean_artist(a), item['artists']))
                 elif item['label'] == 'Executive Producer':
-                    album['executive_producers'] = list(map(lambda a: self.clean_artist(a), item['artists'])
+                    album['executive_producers'] = list(map(lambda a: self.clean_artist(a), item['artists']))
                 elif item['label'] == 'Label':
-                    album['labels'] = list(map(lambda a: self.clean_artist(a), item['artists'])
+                    album['labels'] = list(map(lambda a: self.clean_artist(a), item['artists']))
+                else:
+                    continue
 
         album = self.__clean(album, self.__clean_album_keys)
 
