@@ -10,7 +10,6 @@ class GeniusResponseCleaner:
         'pyongs_count',
         'release_date_components',
         'current_user_metadata',
-        # 'cover_arts',
         'description_annotation',
         'performance_groups',
         'song_performances',
